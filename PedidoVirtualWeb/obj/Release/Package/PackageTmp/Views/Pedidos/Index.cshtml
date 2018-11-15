@@ -1,0 +1,50 @@
+﻿@model IEnumerable<PedidoVirtualWeb.Models.Pedido>
+
+@{
+    ViewBag.Title = "Lista de Pedidos";
+}
+
+<h1 style="color:#FFFFFF">Lista de Pedidos</h1>
+<hr />
+
+<p>@Html.ActionLink("Voltar", "Index", new { }, new { @class = "btn btn-primary" })</p>
+<table style="margin-top:20px; background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF" class="table">
+    <tr style="background-color:#BD323C">
+        <th style="color:#FFFFFF">
+            @Html.DisplayNameFor(model => model.PedidoId)
+        </th>
+
+        <th style="color:#FFFFFF">
+            @Html.DisplayNameFor(model => model.Status.Nome)
+        </th>
+        <th style="color:#FFFFFF">
+            @Html.DisplayNameFor(model => model.Usuario.NomeCompleto)
+        </th>
+        <th style="color:#FFFFFF">
+            @Html.DisplayNameFor(model => model.Data)
+        </th>
+        <th style="color:#FFFFFF">Ações</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PedidoId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.NomeCompleto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data)
+        </td>
+        <td>
+            @Html.ActionLink("Alterar", "Edit", new { id = item.PedidoId }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Visualizar", "Details", new { id = item.PedidoId }, new { @class = "btn btn-primary" })
+        </td>
+    </tr>
+}
+
+</table>

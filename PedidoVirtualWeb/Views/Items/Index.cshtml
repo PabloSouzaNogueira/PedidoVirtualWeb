@@ -1,0 +1,58 @@
+﻿@model IEnumerable<PedidoVirtualWeb.Models.Item>
+
+@{
+    ViewBag.Title = "Lista de Itens";
+}
+
+<h1 style="color:#FFFFFF">Lista de Itens</h1>
+<hr />
+<p>@Html.ActionLink("Novo item", "Create", new { }, new { @class = "btn btn-primary" })</p>
+
+<table style="margin-top:20px; background-color:#E1E1E1; padding:10px; border-radius:5px; border:2px solid #FFFFFF" class="table">
+    <tr style="background-color:#BD323C">
+        <th style="color:#FFFFFF">
+            @Html.DisplayNameFor(model => model.Foto)
+        </th>
+        <th style="color:#FFFFFF">
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th style="color:#FFFFFF">
+            @Html.DisplayNameFor(model => model.Categoria.Nome)
+        </th>
+        <th style="color:#FFFFFF">
+            @Html.DisplayNameFor(model => model.Preco)
+        </th>
+        <th style="color:#FFFFFF">
+            @Html.DisplayNameFor(model => model.Estoque)
+        </th>
+        <th style="color:#FFFFFF">Ações</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                <img style="width:90px; height:90px" src="@Html.DisplayFor(modelItem => item.Foto)" />
+            </td>
+            <td style="line-height: 90px; vertical-align: central;">
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td style="line-height: 90px; vertical-align: central;">
+                @Html.DisplayFor(modelItem => item.Categoria.Nome)
+            </td>
+            <td style="line-height: 90px; vertical-align: central;">
+                @Html.DisplayFor(modelItem => item.Preco)
+            </td>
+            <td style="line-height: 90px; vertical-align: central;">
+                @Html.DisplayFor(modelItem => item.Estoque)
+            </td>
+            <td style="line-height: 90px; vertical-align: central;">
+                @Html.ActionLink("Editar", "Edit", new { id = item.ItemId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Visualizar", "Details", new { id = item.ItemId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Excluir", "Delete", new { id = item.ItemId }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>

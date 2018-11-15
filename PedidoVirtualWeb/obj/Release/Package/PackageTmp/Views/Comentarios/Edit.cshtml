@@ -1,0 +1,44 @@
+﻿@model PedidoVirtualWeb.Models.Comentario
+
+@{
+    ViewBag.Title = "Editar Comentário";
+}
+<h1 style="color:#FFFFFF">Editar Comentário</h1>
+<hr />
+<div> @Html.ActionLink("Voltar", "Details", "Home", new { id = @Html.DisplayFor(model => model.ItemId) }, new { @class = "btn btn-primary" })</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ComentarioId)
+    @Html.HiddenFor(model => model.UsuarioId)
+    @Html.HiddenFor(model => model.ItemId)
+    @Html.HiddenFor(model => model.Data)
+
+    <div style="margin-top:20px; background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF" class="container">
+        <h1 style="color:#BD323C; text-align:center">@Html.DisplayFor(model => model.Item.Nome)</h1>
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-thumbnail" style="width:100%; height:300px" src="@Html.DisplayFor(model => model.Item.Foto)" />
+            </div>
+            <div class="col-md-6">
+                <h3 style="font-style:italic; text-align:justify">@Html.DisplayFor(model => model.Item.Descricao)</h3>
+                <br />
+                <h2 style="font-style:italic; text-align:justify" class="text-success">@String.Format("R$ {0},00", @Html.DisplayFor(model => model.Item.Preco))</h2>
+                <br />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                @Html.TextAreaFor(model => model.Mensagem, 10, 120, htmlAttributes: new { style = "width: 100%; max-width: 100%;", @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <br />
+    <input type="submit" value="Salvar" class="btn btn-primary" />
+    <br />
+    <br />
+    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+}

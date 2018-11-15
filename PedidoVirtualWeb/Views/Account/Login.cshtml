@@ -1,0 +1,51 @@
+﻿@using PedidoVirtualWeb.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Efetuar login";
+}
+
+<h1 style="color:#FFFFFF">@ViewBag.Title</h1>
+
+<hr />
+
+<div style="margin-top:20px; background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF">
+    <section id="loginForm">
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Efetuar login" class="btn btn-primary" />
+                </div>
+            </div>
+
+            @* Ativar isso assim que você tiver a confirmação de conta ativada para a funcionalidade de redefinição de senha
+                <p>
+                    @Html.ActionLink("Esqueceu sua senha?", "ForgotPassword")
+                </p>*@
+        }
+    </section>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,65 @@
+﻿@model PedidoVirtualWeb.Models.Pedido
+
+@{
+    ViewBag.Title = "Pedido";
+}
+
+<h1 style="color:#FFFFFF">Pedido</h1>
+<hr />
+
+
+<div> @Html.ActionLink("Voltar", "MeusPedidos", new { email = User.Identity.Name }, new { @class = "btn btn-primary" })</div>
+
+<div style="margin-top:10px; margin-bottom:10px" class="col-md-12">
+    <div class="row">
+        <div class="col-md-6" style="background-color:#BD323C; padding:5px; border-radius:5px;  border:2px solid #FFFFFF">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 style="color:#FFFFFF">@Html.DisplayNameFor(model => model.PedidoId) : @Html.DisplayFor(model => model.PedidoId)</h3>
+                </div>
+                <div class="col-md-6">
+                    <h3 style="color:#FFFFFF">@Html.DisplayNameFor(model => model.Status.Nome) : @Html.DisplayFor(model => model.Status.Nome)</h3>
+                </div>
+            </div>
+        </div>
+
+        <div style=" background-color:#33B048; padding:5px; border-radius:5px;  border:2px solid #FFFFFF" class="col-md-6">
+            <h3 style="color:#FFFFFF; text-align:center">@String.Format("TOTAL: R$ {0},00", @ViewBag.Total)</h3>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12" style="background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF">
+
+    @foreach (var item in Model.PedidoItems)
+    {
+            <div style="margin-bottom:10px;" class="row">
+            <div class="col-md-6">
+                <img class="img-thumbnail" style="width:100%; height:250px" src="@Html.DisplayFor(model => item.Item.Foto)" />
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <h3>@Html.DisplayNameFor(model => item.Item.Nome)</h3>
+                </div>
+                <div class="col-md-6">
+                    <h3>@Html.DisplayFor(model => item.Item.Nome)</h3>
+                </div>
+                <div class="col-md-6">
+                    <h3>@Html.DisplayNameFor(model => item.Item.Preco)</h3>
+                </div>
+                <div class="col-md-6">
+                    <h3>@String.Format("R$ {0},00", @Html.DisplayFor(model => item.Item.Preco))</h3>
+                </div>
+                <div class="col-md-6">
+                    <h3>@Html.DisplayNameFor(model => item.Quantidade)</h3>
+                </div>
+                <div class="col-md-6">
+                    <h3> @Html.DisplayFor(model => item.Quantidade)</h3>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+
+

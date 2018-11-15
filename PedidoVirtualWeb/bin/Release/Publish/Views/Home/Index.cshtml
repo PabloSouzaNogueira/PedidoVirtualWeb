@@ -1,0 +1,86 @@
+﻿
+
+@{
+    ViewBag.Title = "Pedido Virtual";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div style="margin-top:20px; background-color:#BD323C; padding:10px; border-radius:5px;  border:2px solid #FFFFFF" class="col-md-12">
+
+            <h2 class="text-center" style="color:#FFFFFF">Salgados</h2>
+            <hr />
+            <ul class="row">
+                @foreach (var item in ViewBag.Salgados)
+                {
+                    <li style="display:inline-block">
+                        <div style="background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF">
+                            <img style="width:200px; height:200px" class="img-thumbnail" src="@item.Foto" />
+                            <h3 style="width:200px;" class="lead">@item.Nome</h3>
+                            <h4 class="text-success">@String.Format("R$ {0},00", @item.Preco)</h4><br />
+                            <div> @Html.ActionLink("Visualizar", "Details", new { id = @item.ItemId }, new { @class = "btn btn-primary" })</div>
+                        </div>
+                    </li>
+                }
+            </ul>
+
+        </div>
+
+        <div style="margin-top:20px; background-color:#BD323C; padding:10px; border-radius:5px;  border:2px solid #FFFFFF" class="col-md-12">
+
+            <h2 class="text-center" style="color:#FFFFFF">Doces</h2>
+            <hr />
+            <ul class="row">
+                @foreach (var item in ViewBag.Doces)
+                {
+                    <li style="display:inline-block">
+                        <div style="background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF">
+                            <img style="width:200px; height:200px" class="img-thumbnail" src="@item.Foto" />
+                            <h3 style="width:200px;" class="lead">@item.Nome</h3>
+                            <h4 class="text-success">@String.Format("R$ {0},00", @item.Preco)</h4><br />
+
+                            <div> @Html.ActionLink("Visualizar", "Details", new { id = @item.ItemId }, new { @class = "btn btn-primary" })</div>
+
+                        </div>
+                    </li>
+                }
+            </ul>
+
+        </div>
+
+        <div style="margin-top:20px; background-color:#BD323C; padding:10px; border-radius:5px;  border:2px solid #FFFFFF" class="col-md-12">
+
+            <h2 class="text-center" style="color:#FFFFFF">Bebidas</h2>
+            <hr />
+            <ul class="row">
+                @foreach (var item in ViewBag.Bebidas)
+                {
+                    <li style="display:inline-block">
+                        <div style="background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF">
+                            <img style="width:200px; height:200px" class="img-thumbnail" src="@item.Foto" />
+                            <h3 style="width:200px;" class="lead">@item.Nome</h3>
+                            <h4 class="text-success">@String.Format("R$ {0},00", @item.Preco)</h4><br />
+                            <div> @Html.ActionLink("Visualizar", "Details", new { id = @item.ItemId }, new { @class = "btn btn-primary" })</div>
+                        </div>
+                    </li>
+                }
+            </ul>
+
+        </div>
+
+
+
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

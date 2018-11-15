@@ -1,0 +1,91 @@
+﻿@model IEnumerable<PedidoVirtualWeb.Models.Pedido>
+
+
+@{
+    ViewBag.Title = "Meus Pedidos";
+}
+
+<h1 style="color:#FFFFFF">Meus Pedidos</h1>
+<hr />
+<p>@Html.ActionLink("Voltar", "Index", "Home", new { }, new { @class = "btn btn-primary" })</p>
+
+<h3 style="color:#FFFFFF; text-align:center">Carrinho</h3>
+
+<table style="margin-top:20px; background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF" class="table">
+    <tr style="background-color:#BD323C">
+        <th style="color:#FFFFFF">Código Item</th>
+        <th style="color:#FFFFFF">Foto</th>
+        <th style="color:#FFFFFF">Nome</th>
+        <th style="color:#FFFFFF">Preço</th>
+        <th style="color:#FFFFFF">Quantidade</th>
+        <th style="color:#FFFFFF">Ações</th>
+    </tr>
+
+    @foreach (var pedidoItem in ViewBag.Carrinho)
+    {
+        <tr>
+            <td style="line-height: 90px; vertical-align: central;">
+                @pedidoItem.Item.ItemId
+            </td>
+            <td>
+                <img style="width:90px; height:90px" src="@pedidoItem.Item.Foto" />
+            </td>
+            <td style="line-height: 90px; vertical-align: central;">
+                @pedidoItem.Item.Nome
+            </td>
+            <td style="line-height: 90px; vertical-align: central;">
+                @pedidoItem.Item.Preco
+            </td>
+            <td style="line-height: 90px; vertical-align: central;">
+                @pedidoItem.Quantidade
+            </td>
+            <td style="line-height: 90px; vertical-align: central;">
+                @Html.ActionLink("Editar", "EditarPedidoItem", new { itemId = @pedidoItem.Item.ItemId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Deletar", "RemoverPedidoItem", new { itemId = @pedidoItem.Item.ItemId }, new { @class = "btn btn-primary" })
+            </td>
+
+        </tr>
+    }
+
+</table>
+@if (!ViewBag.CarrinhoVazio)
+{
+    <div> @Html.ActionLink("Confirmar Compra", "ConfirmarCompra", new { }, new { @class = "btn btn-success" })</div>
+}
+
+<div>@Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })</div>
+
+<br />
+<hr />
+<br />
+<h3 style="color:#FFFFFF; text-align:center">Histórico de Pedidos</h3>
+
+<table style="margin-top:20px; background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF" class="table">
+    <tr style="background-color:#BD323C">
+        <th style="color:#FFFFFF">@Html.DisplayNameFor(model => model.PedidoId)</th>
+        <th style="color:#FFFFFF">@Html.DisplayNameFor(model => model.Status.Nome)</th>
+        <th style="color:#FFFFFF">@Html.DisplayNameFor(model => model.Data)</th>
+        <th style="color:#FFFFFF">Ações</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PedidoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.ActionLink("Visualizar", "VisualizarPedido", new { pedidoId = item.PedidoId }, new { @class = "btn btn-primary" })
+            </td>
+
+        </tr>
+    }
+
+</table>
+

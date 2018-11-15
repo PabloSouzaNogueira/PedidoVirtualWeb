@@ -1,0 +1,99 @@
+﻿@model PedidoVirtualWeb.Models.Item
+
+@{
+    ViewBag.Title = "Detalhes do Item";
+}
+
+<h1 style="color:#FFFFFF">Detalhes do Item</h1>
+
+<hr />
+
+<div> @Html.ActionLink("Voltar", "Index", new { }, new { @class = "btn btn-primary" })</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div style="margin-top:20px; background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF">
+        @Html.HiddenFor(model => model.ItemId)
+        @Html.HiddenFor(model => model.Estoque)
+
+        <div class="row" style="padding:5px">
+            <h1 style="color:#BD323C; text-align:center">@Html.DisplayFor(model => model.Nome)</h1>
+            <br />
+            <div class="col-md-6">
+                <img class="img-thumbnail" style="width:100%; height:300px" src="@Html.DisplayFor(model => model.Foto)" />
+            </div>
+            <div class="col-md-6">
+                <h3 style="font-style:italic; text-align:justify">@Html.DisplayFor(model => model.Descricao)</h3>
+                <br />
+                <h2 style="font-style:italic; text-align:justify" class="text-success">@String.Format("R$ {0},00", @Html.DisplayFor(model => model.Preco))</h2>
+                <br />
+
+
+
+                @if (ViewBag.Adicionado)
+                {
+                    <input type="submit" value="Adicionado" disabled="disabled" class="btn btn-info" />
+                }
+                else
+                {
+                    <input type="submit" value="Comprar" class="btn btn-success" />
+                }
+
+
+            </div>
+        </div>
+
+    </div>
+    <br />
+    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+    <br />
+    <h1 style="color:#FFFFFF; text-align:center">Comentários</h1>
+    <br />
+
+    <div class="container-fluid">
+        @foreach (var comentario in ViewBag.Comentarios)
+        {
+            <div class="row" style="margin-bottom:5px; background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF">
+                <div class="col-md-3">
+                    <p style="font-size:15px; margin-bottom:0px; font-weight: bold">
+                        Usuário:
+                        <span style="font-size:25px; margin-bottom:0px; font-weight: normal">@comentario.Usuario.NomeCompleto</span>
+                    </p>
+                    <p style="font-size:15px; margin-bottom:0px; font-weight: bold">
+                        Data Publicação:
+                        <span style="font-size:12px; margin-bottom:0px; font-weight: normal">@comentario.Data</span>
+                    </p>
+                </div>
+                <div class="col-md-9">
+                    <h4 class="text-info" style="font-style:italic">" @comentario.Mensagem</h4>
+                </div>
+
+                @if (@comentario.Usuario.UserName == ViewBag.Usuario)
+                {
+                    @Html.ActionLink("Editar", "Edit", "Comentarios", new { id = @comentario.ComentarioId }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Excluir", "Delete", "Comentarios", new { id = @comentario.ComentarioId }, new { @class = "btn btn-primary" })
+                }
+            </div>
+        }
+    </div>
+}
+<br />
+<br />
+@using (Html.BeginForm("AdicionarComentario", "Home"))
+{
+    if (!@ViewBag.Comentado)
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ItemId)
+        @Html.HiddenFor(model => model.Estoque)
+        <div style="background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF">
+            <h3 class="lead">Adicione um comentário:</h3>
+            @Html.TextAreaFor(model => model.ComentarioTemporario, 10, 120, htmlAttributes: new { style = "width: 100%; max-width: 100%;", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ComentarioTemporario, "", new { @class = "text-danger" })
+            <br />
+            <input type="submit" value="Enviar Comentário" class="btn btn-primary" />
+        </div>
+    }
+}

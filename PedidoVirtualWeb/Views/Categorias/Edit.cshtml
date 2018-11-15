@@ -1,0 +1,42 @@
+﻿@model PedidoVirtualWeb.Models.Categoria
+
+@{
+    ViewBag.Title = "Editar Categoria";
+}
+
+<h1 style="color:#FFFFFF">Editar Categoria</h1>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <hr />
+
+    <div> @Html.ActionLink("Voltar", "Index", new { }, new { @class = "btn btn-primary" })</div>
+
+    <div style="margin-top:20px; background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF" class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CategoriaId)
+
+        <div class="container">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+    <br />
+    <input type="submit" value="Salvar" class="btn btn-primary" />
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

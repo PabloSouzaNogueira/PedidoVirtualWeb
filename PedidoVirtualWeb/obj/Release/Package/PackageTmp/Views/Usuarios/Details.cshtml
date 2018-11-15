@@ -1,0 +1,57 @@
+﻿@model PedidoVirtualWeb.Models.Usuario
+
+@{
+    ViewBag.Title = "Visualizar Usuário";
+}
+
+<h1 style="color:#FFFFFF">@ViewBag.Title</h1>
+<hr />
+<div> @Html.ActionLink("Voltar", "Index", new { }, new { @class = "btn btn-primary" })</div>
+
+<div style="margin-top:20px; background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF">
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sobrenome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sobrenome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Endereco)
+        </dd>
+
+    </dl>
+</div>
+<br />
+<div>@Html.ActionLink("Editar", "Edit", new { id = Model.UsuarioId }, new { @class = "btn btn-primary" })</div>

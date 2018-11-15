@@ -1,0 +1,71 @@
+﻿@model PedidoVirtualWeb.Models.Item
+
+@{
+    ViewBag.Title = "Excluir Item";
+}
+
+<h1 style="color:#FFFFFF">@ViewBag.Title </h1>
+<hr />
+<div> @Html.ActionLink("Voltar", "Index", new { }, new { @class = "btn btn-primary" })</div>
+<div style="margin-top:20px; background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF">
+    <dl class="dl-horizontal">
+
+        <dt></dt>
+        <dd>
+            <img style="width:200px; height:200px" class="img-thumbnail" src="@Html.DisplayFor(model => model.Foto)" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Preco)
+        </dt>
+
+        <dd>
+            @String.Format("R$ {0},00", @Html.DisplayFor(model => model.Preco))
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estoque)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estoque)
+        </dd>
+
+    </dl>
+
+</div>
+<br />
+@Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Excluir" class="btn btn-primary" />
+    </div>
+}

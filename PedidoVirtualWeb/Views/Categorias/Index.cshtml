@@ -1,0 +1,31 @@
+﻿@model IEnumerable<PedidoVirtualWeb.Models.Categoria>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 style="color:#FFFFFF">Lista de Categorias</h1>
+<hr />
+<p>@Html.ActionLink("Nova categoria", "Create", new { }, new { @class = "btn btn-primary" })</p>
+
+<table style="margin-top:20px; background-color:#E1E1E1; padding:10px; border-radius:5px;  border:2px solid #FFFFFF" class="table">
+    <tr style="background-color:#BD323C">
+        <th style="color:#FFFFFF" class="col-md-6"> @Html.DisplayNameFor(model => model.Nome) </th>
+        <th style="color:#FFFFFF" class="col-md-6">Ações</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-md-6">
+                <b>@Html.DisplayFor(modelItem => item.Nome)</b>
+            </td>
+            <td class="col-md-6">
+                @Html.ActionLink("Editar", "Edit", new { id = item.CategoriaId }, new { @class = "btn btn-primary" }) 
+                @Html.ActionLink("Visualizar", "Details", new { id = item.CategoriaId }, new { @class = "btn btn-primary" }) 
+                @Html.ActionLink("Excluir", "Delete", new { id = item.CategoriaId }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>
